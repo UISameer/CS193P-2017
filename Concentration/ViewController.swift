@@ -6,7 +6,11 @@ class ViewController: UIViewController {
     @IBOutlet var cardButtons: [UIButton]!
     var emojiChoices = ["👻", "😼", "👻", "👹", "🐿", "🐶"]
     var emoji = Dictionary<Int, String>()
-    lazy var game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
+    lazy var game = Concentration(numberOfPairsOfCards: numberOfPairsOfCards)
+    
+    var numberOfPairsOfCards: Int {
+        return (cardButtons.count + 1) / 2
+    }
     
     var flipCount = 0 {
         didSet {
