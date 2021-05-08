@@ -1,6 +1,6 @@
 import UIKit
 
-class ConcentrationViewController: UIViewController {
+class ConcentrationViewController: VCLLoggingViewController {
     
     @IBOutlet private weak var flipCountLabel: UILabel! {
         didSet {
@@ -22,6 +22,10 @@ class ConcentrationViewController: UIViewController {
     
     var numberOfPairsOfCards: Int {
         return (cardButtons.count + 1) / 2
+    }
+    
+    override var vclLoggingName: String {
+        return "Game"
     }
     
     private(set) var flipCount = 0 {

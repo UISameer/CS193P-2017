@@ -1,6 +1,10 @@
 import UIKit
 
-class ConcentrationThemeChooserViewController: UIViewController, UISplitViewControllerDelegate {
+class ConcentrationThemeChooserViewController: VCLLoggingViewController, UISplitViewControllerDelegate {
+    
+    override var vclLoggingName: String {
+        return "ThemeChooser"
+    }
     
     let themes = [
         "Sports": "⚽️🏀🏈⚾️🪀🏒🏸⛳️🤿🏹🥊🛼",
@@ -8,7 +12,9 @@ class ConcentrationThemeChooserViewController: UIViewController, UISplitViewCont
         "Faces": "😀🥲😍🥰😘😌😇🤣🤓🥳🥸🤨"
     ]
     
-    override class func awakeFromNib() {
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        splitViewController?.delegate = self
     }
     
     func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
@@ -23,19 +29,19 @@ class ConcentrationThemeChooserViewController: UIViewController, UISplitViewCont
     // MARK: - Navigation
     
     @IBAction func performSegue(_ sender: Any) {
-        if let cvc = splitDetailCVC {
-            if let themeName = (sender as? UIButton)?.currentTitle, let theme = themes[themeName] {
-                cvc.theme = theme
-            }
-        } else if let cvc = lastSeguedToConcenntrationVC {
-            if let themeName = (sender as? UIButton)?.currentTitle, let theme = themes[themeName] {
-                cvc.theme = theme
-            }
-            navigationController?.pushViewController(cvc, animated: true)
-        }
-        else {
+//        if let cvc = splitDetailCVC {
+//            if let themeName = (sender as? UIButton)?.currentTitle, let theme = themes[themeName] {
+//                cvc.theme = theme
+//            }
+//        } else if let cvc = lastSeguedToConcenntrationVC {
+//            if let themeName = (sender as? UIButton)?.currentTitle, let theme = themes[themeName] {
+//                cvc.theme = theme
+//            }
+//            navigationController?.pushViewController(cvc, animated: true)
+//        }
+//        else {
             performSegue(withIdentifier: "choose theme", sender: sender)
-        }
+//        }
     }
     
     private var lastSeguedToConcenntrationVC: ConcentrationViewController?
@@ -56,3 +62,5 @@ class ConcentrationThemeChooserViewController: UIViewController, UISplitViewCont
         }
     }
 }
+
+
